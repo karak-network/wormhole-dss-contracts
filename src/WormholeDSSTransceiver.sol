@@ -12,10 +12,6 @@ import "wormhole-solidity-sdk/Utils.sol";
 contract WormholeDSSTransceiver is Transceiver, IWormholeDSSReceiver {
     event MessageReceived(uint16 sourceChain, bytes32 sourceNttManager, bytes message);
 
-    constructor() {
-        _disableInitializers();
-    }
-
     IWormholeDSS wormholeDSS;
 
     function initialize(address _nttManager, address _wormholeDssAddress) external initializer {

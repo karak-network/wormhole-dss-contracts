@@ -17,7 +17,7 @@ import {VaultLib} from "../src/karak/src/entities/VaultLib.sol";
 import {SlashingHandler} from "../src/karak/src/SlashingHandler.sol";
 import {ERC20Mintable} from "../src/karak/test/helpers/contracts/ERC20Mintable.sol";
 
-contract DeployWithCore is Script {
+contract DeployCore is Script {
     address internal constant CORE_PROXY_ADMIN = 0x70997970C51812dc3A010C7d01b50e0d17dc79C8;
     address internal constant CORE_MANAGER = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
     address internal constant CORE_VETO_COMMITTEE = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
@@ -65,15 +65,7 @@ contract DeployWithCore is Script {
         }
         console2.log();
 
-        setupOperator(address(coreProxy), address(testERC20), address(slashingHandlerProxy), address(vaultImpl));
-
-        WormholeDSS dss = deployDSS(address(coreProxy));
-        console2.log("address of DSS: ", address(dss));
-        console2.log();
-
-        WormholeDSSTransceiver transceiver = deployTransceiver(NTT_MANAGER, address(dss));
-        console2.log("address of Transceiver: ", address(transceiver));
-        console2.log();
+        allowListAsset(address(coreProxy), address(testERC20), address(slashingHandlerProxy), address(vaultImpl));
 
         vm.stopBroadcast();
     }
@@ -106,7 +98,7 @@ contract DeployWithCore is Script {
         slashingHandler.initialize(msg.sender, tokens);
     }
 
-    function setupOperator(address coreProxy, address erc20Token, address slashingHandler, address vaultImpl)
+    function allowListAsset(address coreProxy, address erc20Token, address slashingHandler, address vaultImpl)
         public
         returns (address vaultAddress)
     {
