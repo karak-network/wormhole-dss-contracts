@@ -1,66 +1,22 @@
-## Foundry
+# Wormhole DSS
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## Setup to Enable Wormhole DSS validation for NTT
 
-Foundry consists of:
+_Note: Currently Wormhole DSS is only supported on EVM chains that already have a deployment of Karak Protocol on them._
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+To setup the Native Token Transfer (NTT) protocol you can follow this [guide](https://wormhole.com/docs/build/contract-integrations/native-token-transfers/deployment-process/deploy-to-evm/). After that to enable Wormhole DSS validation to NTT you can follow the following steps:
 
-## Documentation
+Add the following environment variables to the `.env` file:
 
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
+```
+WORMHOLE_DSS=<WORMHOLE_DSS_ADDRESS_ON_THAT_CHAIN>
+NTT_MANAGER=<NTT_MANAGER_ADDRESS_ON_THAT_CHAIN>
 ```
 
-### Test
+and run the following command to deploy the contracts:
 
-```shell
-$ forge test
+```
+forge script script/deployDSS.s.sol:DeployDSS --rpc-url <RPC_URL_OF_THAT_CHAIN> --broadcast --verify --etherscan-api-key <ETHERSCAN_API_KEY_OF_THAT_CHAIN>
 ```
 
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+This will update your NTT setup to also add the Wormhole DSS validation.
