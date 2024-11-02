@@ -1,0 +1,20 @@
+{
+  "assetData": [
+    {
+      "name": "Karak-Lista Staked BNB",
+      "slashingHandler": "0xAFe106717E5Af6B81D0F43296317710EDCC22D32",
+      "token": "0xB0b84D294e0C75A6abe60171b70edEb2EFd14A1B"
+    },
+    {
+      "name": "Karak-Lista USD",
+      "slashingHandler": "0xAFe106717E5Af6B81D0F43296317710EDCC22D32",
+      "token": "0x0782b6d8c4551B9760e74c0545a9bCD90bdc41E5"
+    },
+    {
+      "name": "Karak-Solv BTC",
+      "slashingHandler": "0xAFe106717E5Af6B81D0F43296317710EDCC22D32",
+      "token": "0x4aae823a6a0b376De6A78e74eCC5b079d38cBCf7"
+    }
+  ],
+  "core": "0x27e9C40128c77B157130Fc5fAEFcDe26D6194c15"
+}

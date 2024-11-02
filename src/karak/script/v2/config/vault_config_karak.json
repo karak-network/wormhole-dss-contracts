@@ -1,0 +1,23 @@
+{
+  "core": "0x27e9C40128c77B157130Fc5fAEFcDe26D6194c15",
+  "vaultData": [
+    {
+      "decimals": 18,
+      "name": "Karak-USD Coin",
+      "symbol": "kUSDC",
+      "token": "0xa415021bC5c4C3b5B989116DC35Ae95D9C962c8D"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Restaked Swell ETH",
+      "symbol": "krswETH",
+      "token": "0xf948aACec00289Fc33D8226391f7e04bb457aD49"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Wrapped ETH",
+      "symbol": "kWETH",
+      "token": "0x4200000000000000000000000000000000000006"
+    }
+  ]
+}

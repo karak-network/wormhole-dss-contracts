@@ -1,0 +1,11 @@
+{
+  "core": "0x27e9C40128c77B157130Fc5fAEFcDe26D6194c15",
+  "vaultData": [
+    {
+      "decimals": 18,
+      "name": "Karak-Blast",
+      "symbol": "kBLAST",
+      "token": "0xb1a5700fA2358173Fe465e6eA4Ff52E36e88E2ad"
+    }
+  ]
+}

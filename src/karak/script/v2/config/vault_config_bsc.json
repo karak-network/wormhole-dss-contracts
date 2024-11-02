@@ -1,0 +1,23 @@
+{
+  "core": "0x27e9C40128c77B157130Fc5fAEFcDe26D6194c15",
+  "vaultData": [
+    {
+      "decimals": 18,
+      "name": "Karak-Lista Staked BNB",
+      "symbol": "kslisBNB",
+      "token": "0xB0b84D294e0C75A6abe60171b70edEb2EFd14A1B"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Lista USD",
+      "symbol": "klisUSD",
+      "token": "0x0782b6d8c4551B9760e74c0545a9bCD90bdc41E5"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Solv BTC",
+      "symbol": "kSolvBTC",
+      "token": "0x4aae823a6a0b376De6A78e74eCC5b079d38cBCf7"
+    }
+  ]
+}

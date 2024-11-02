@@ -1,0 +1,45 @@
+{
+    "assetData": [
+        {
+            "name": "Karak-Arbitrum",
+            "slashingHandler": "0x6cdC5106DC100115E6C310539Fe44a61b3EEa6C4",
+            "token": "0x912CE59144191C1204E64559FE8253a0e49E6548"
+        },
+        {
+            "name": "Karak-Etherfi Gov Token",
+            "slashingHandler": "0x6cdC5106DC100115E6C310539Fe44a61b3EEa6C4",
+            "token": "0x7189fb5b6504bbff6a852b13b7b82a3c118fdc27"
+        },
+        {
+            "name": "Karak-USD Coin",
+            "slashingHandler": "0x6cdC5106DC100115E6C310539Fe44a61b3EEa6C4",
+            "token": "0xaf88d065e77c8cc2239327c5edb3a432268e5831"
+        },
+        {
+            "name": "Karak-Tether USD",
+            "slashingHandler": "0x6cdC5106DC100115E6C310539Fe44a61b3EEa6C4",
+            "token": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9"
+        },
+        {
+            "name": "Karak-Lido Wrapped stETH",
+            "slashingHandler": "0x6cdC5106DC100115E6C310539Fe44a61b3EEa6C4",
+            "token": "0x5979D7b546E38E414F7E9822514be443A4800529"
+        },
+        {
+            "name": "Karak-Etherfi Wrapped eETH",
+            "slashingHandler": "0x6cdC5106DC100115E6C310539Fe44a61b3EEa6C4",
+            "token": "0x35751007a407ca6FEFfE80b3cB397736D2cf4dbe"
+        },
+        {
+            "name": "Karak-Renzo Restaked ETH",
+            "slashingHandler": "0x6cdC5106DC100115E6C310539Fe44a61b3EEa6C4",
+            "token": "0x2416092f143378750bb29b79eD961ab195CcEea5"
+        },
+        {
+            "name": "Karak-Kelp Restaked ETH",
+            "slashingHandler": "0x6cdC5106DC100115E6C310539Fe44a61b3EEa6C4",
+            "token": "0x4186bfc76e2e237523cbc30fd220fe055156b41f"
+        }
+    ],
+    "core": "0xf3Ed85D882b5d9A67fC10dBf8f9AA991212983aA"
+}

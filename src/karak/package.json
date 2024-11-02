@@ -1,0 +1,25 @@
+{
+	"name": "karak-v2-contracts",
+	"version": "0.0.0",
+	"description": "",
+	"scripts": {
+		"build": "forge build --ast",
+		"clean": "forge clean",
+		"test": "forge test",
+		"setup:contracts": "forge script script/v2/SetupCoreLocal.s.sol --broadcast --rpc-url http://localhost:8545 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 --code-size-limit 100000",
+		"dev": "anvil & pnpm setup:contracts"
+	},
+	"devDependencies": {
+		"@types/node": "^20.11.24",
+		"tsx": "^4.7.1"
+	},
+	"dependencies": {
+		"@openzeppelin/contracts": "^5.0.2",
+		"@openzeppelin/contracts-upgradeable": "^5.0.2",
+		"solady": "^v0.0.201"
+	},
+	"packageManager": "pnpm@9.0.6",
+	"engines": {
+		"node": ">=18"
+	}
+}

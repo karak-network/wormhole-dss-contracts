@@ -1,0 +1,173 @@
+{
+  "core": "0x27e9C40128c77B157130Fc5fAEFcDe26D6194c15",
+  "vaultData": [
+    {
+      "decimals": 18,
+      "name": "Karak-Etherfi Wrapped eETH",
+      "symbol": "kWeETH",
+      "token": "0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Restaked Swell ETH",
+      "symbol": "krswETH",
+      "token": "0xFAe103DC9cf190eD75350761e95403b7b8aFa6c0"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Kelp Restaked ETH",
+      "symbol": "krsETH",
+      "token": "0xA1290d69c65A6Fe4DF752f95823fae25cB99e5A7"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Bedrock uniETH",
+      "symbol": "kuniETH",
+      "token": "0xF1376bceF0f78459C0Ed0ba5ddce976F1ddF51F4"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Renzo Restaked ETH",
+      "symbol": "kezETH",
+      "token": "0xbf5495Efe5DB9ce00f80364C8B423567e58d2110"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Magpie swETH",
+      "symbol": "kmswETH",
+      "token": "0x32bd822d615A3658A68b6fDD30c2fcb2C996D678"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Magpie stETH",
+      "symbol": "kmstETH",
+      "token": "0x49446A0874197839D15395B908328a74ccc96Bc0"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Magpie wBETH",
+      "symbol": "kmwBETH",
+      "token": "0xE46a5E19B19711332e33F33c2DB3eA143e86Bc10"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Puffer Restaked ETH",
+      "symbol": "kpufETH",
+      "token": "0xD9A442856C234a39a81a089C06451EBAa4306a72"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Swell Ether",
+      "symbol": "kswETH",
+      "token": "0xf951E335afb289353dc249e82926178EaC7DEd78"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Staked Frax Ether",
+      "symbol": "ksfrxETH",
+      "token": "0xac3e018457b222d93114458476f3e3416abbe38f"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Wrapped Origin Ether",
+      "symbol": "kWOETH",
+      "token": "0xDcEe70654261AF21C44c093C300eD3Bb97b78192"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Lido Wrapped stETH",
+      "symbol": "kwstETH",
+      "token": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Mantle Ether",
+      "symbol": "kmETH",
+      "token": "0xd5f7838f5c461feff7fe49ea5ebaf7728bb0adfa"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Stader Ether",
+      "symbol": "kETHx",
+      "token": "0xA35b1B31Ce002FBF2058D22F30f95D405200A15b"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Autocomp Pirex Ether",
+      "symbol": "kapxETH",
+      "token": "0x9Ba021B0a9b958B5E75cE9f6dff97C7eE52cb3E6"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Rocket Pool Ether",
+      "symbol": "krETH",
+      "token": "0xae78736Cd615f374D3085123A210448E74Fc6393"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Coinbase Ether",
+      "symbol": "kcbETH",
+      "token": "0xBe9895146f7AF43049ca1c1AE358B0541Ea49704"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Binance Ether",
+      "symbol": "kwBETH",
+      "token": "0xa2e3356610840701bdf5611a53974510ae27e2e1"
+    },
+    {
+      "decimals": 6,
+      "name": "Karak-Ethena USDe",
+      "symbol": "kUSDe",
+      "token": "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Staked Frax",
+      "symbol": "ksFRAX",
+      "token": "0xA663B02CF0a4b149d2aD41910CB81e23e1c41c32"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Ethena Staked USDe",
+      "symbol": "ksUSDe",
+      "token": "0x9d39a5de30e57443bff2a8307a4256c8797a3497"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-USD Coin",
+      "symbol": "kUSDC",
+      "token": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Tether USD",
+      "symbol": "kUSDT",
+      "token": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Savings DAI",
+      "symbol": "ksDAI",
+      "token": "0x83F20F44975D03b1b09e64809B757c47f942BEeA"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Wrapped Bitcoin",
+      "symbol": "kwBTC",
+      "token": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Etherfi Gov Token",
+      "symbol": "kETHFI",
+      "token": "0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Maker",
+      "symbol": "kMKR",
+      "token": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2"
+    }
+  ]
+}

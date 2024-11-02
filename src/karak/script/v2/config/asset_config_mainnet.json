@@ -1,0 +1,15 @@
+{
+    "assetData": [
+        {
+            "name": "wBtc-Vault",
+            "slashingHandler": "0xAFe106717E5Af6B81D0F43296317710EDCC22D32",
+            "token": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
+        },
+        {
+            "name": "wBtc-Vault",
+            "slashingHandler": "0xAFe106717E5Af6B81D0F43296317710EDCC22D32",
+            "token": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599"
+        }
+    ],
+    "core": "0x27e9C40128c77B157130Fc5fAEFcDe26D6194c15"
+}

@@ -1,0 +1,53 @@
+{
+  "core": "0xf3Ed85D882b5d9A67fC10dBf8f9AA991212983aA",
+  "vaultData": [
+    {
+      "decimals": 18,
+      "name": "Karak-Arbitrum",
+      "symbol": "ARBk",
+      "token": "0x912CE59144191C1204E64559FE8253a0e49E6548"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Etherfi Gov Token",
+      "symbol": "kETHFI",
+      "token": "0x7189fb5b6504bbff6a852b13b7b82a3c118fdc27"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-USD Coin",
+      "symbol": "kUSDC",
+      "token": "0xaf88d065e77c8cc2239327c5edb3a432268e5831"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Tether USD",
+      "symbol": "kUSDT",
+      "token": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Lido Wrapped stETH",
+      "symbol": "kwstETH",
+      "token": "0x5979D7b546E38E414F7E9822514be443A4800529"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Etherfi Wrapped eETH",
+      "symbol": "kWeETH",
+      "token": "0x35751007a407ca6FEFfE80b3cB397736D2cf4dbe"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Renzo Restaked ETH",
+      "symbol": "kezETH",
+      "token": "0x2416092f143378750bb29b79eD961ab195CcEea5"
+    },
+    {
+      "decimals": 18,
+      "name": "Karak-Kelp Restaked ETH",
+      "symbol": "krsETH",
+      "token": "0x4186bfc76e2e237523cbc30fd220fe055156b41f"
+    }
+  ]
+}

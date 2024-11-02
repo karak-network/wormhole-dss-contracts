@@ -1,0 +1,10 @@
+{
+  "assetData": [
+    {
+      "name": "Karak-Blast",
+      "slashingHandler": "0xb1a5700fA2358173Fe465e6eA4Ff52E36e88E2ad",
+      "token": "0xb1a5700fA2358173Fe465e6eA4Ff52E36e88E2ad"
+    }
+  ],
+  "core": "0x27e9C40128c77B157130Fc5fAEFcDe26D6194c15"
+}
