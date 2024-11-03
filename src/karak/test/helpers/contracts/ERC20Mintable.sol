@@ -24,6 +24,11 @@ contract ERC20Mintable is ERC20 {
         _burn(from, amount);
     }
 
+    function burn(uint256 amount) external virtual {
+        if (msg.sender == address(0)) revert AddressZero();
+        _burn(msg.sender, amount);
+    }
+
     /// @dev Returns the name of the token.
     function name() public view override returns (string memory) {
         return _name;

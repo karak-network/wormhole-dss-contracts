@@ -9,7 +9,6 @@ import {ICore} from "../src/karak/src/interfaces/ICore.sol";
 import "forge-std/Vm.sol";
 
 contract DeployDSS is Script {
-    address internal NTT_MANAGER = vm.envAddress("NTT_MANAGER");
     address internal CORE = vm.envAddress("CORE");
 
     function run() public {
