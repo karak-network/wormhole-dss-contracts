@@ -107,7 +107,7 @@ contract WormholeDSS is PausableOwnable, BlsBaseDSS {
         //calculated G1 pubkey
         BN254.G1Point memory calculatedG1Pubkey = aggregatedG1Pubkey.plus(nonSigningAggG1Key);
 
-        BlsBaseDSSLib.verifySignature(calculatedG1Pubkey, aggG2Pubkey, aggSign, msgToHash(payload));
+        verifySignature(abi.encode(calculatedG1Pubkey, aggG2Pubkey, aggSign, msgToHash(payload)));
     }
 
     function msgToHash(bytes memory payload) public pure returns (bytes32) {
