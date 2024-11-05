@@ -1,7 +1,7 @@
 pragma solidity ^0.8.20;
 
 import "../libraries/TransceiverStructs.sol";
-import {BN254} from "../libraries/BlsSdk.sol";
+import {BN254} from "../libraries/BN254.sol";
 
 interface IWormholeDSSReceiver {
     function receiveWormholeDSSMessage(

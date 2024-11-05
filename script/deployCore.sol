@@ -109,15 +109,4 @@ contract DeployCore is Script {
 
         Core(coreProxy).allowlistAssets(assets, slashingHandlers);
     }
-
-    function deployDSS(address core) public returns (WormholeDSS dss) {
-        dss = new WormholeDSS();
-        dss.initialize(ICore(core), 0);
-        dss.registerDSS(10e18);
-    }
-
-    function deployTransceiver(address nttManger, address dss) public returns (WormholeDSSTransceiver transceiver) {
-        transceiver = new WormholeDSSTransceiver();
-        transceiver.initialize(nttManger, dss);
-    }
 }

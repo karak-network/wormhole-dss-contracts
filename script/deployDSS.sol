@@ -7,9 +7,11 @@ import {TransparentUpgradeableProxy} from "@openzeppelin/contracts/proxy/transpa
 import {WormholeDSS} from "../src/WormholeDSS.sol";
 import {ICore} from "../src/karak/src/interfaces/ICore.sol";
 import "forge-std/Vm.sol";
+import {IStakeViewer} from "../src/interfaces/IStakeViewer.sol";
 
 contract DeployDSS is Script {
     address internal CORE = vm.envAddress("CORE");
+    address internal STAKING_VIEWER = vm.envAddress("STAKING_VIEWER");
 
     function run() public {
         vm.startBroadcast();
@@ -39,6 +41,6 @@ contract DeployDSS is Script {
     }
 
     function initializeDSS(WormholeDSS dss) public {
-        dss.registerDSS(10e18);
+        dss.initialize(CORE, IStakeViewer(STAKING_VIEWER), 10e18, 30);
     }
 }

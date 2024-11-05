@@ -5,23 +5,24 @@ import "forge-std/console.sol";
 import {IDSS} from "./karak/src/interfaces/IDSS.sol";
 import {ICore} from "./karak/src/interfaces/ICore.sol";
 import {Operator} from "./karak/src/entities/Operator.sol";
-import {BlsSdk, BN254} from "./libraries/BlsSdk.sol";
+import {BN254} from "./libraries/Bn254.sol";
 import "./libraries/Transceiver.sol";
 import "wormhole-solidity-sdk/Utils.sol";
-import "./interfaces/IWormholeDSSReceiver.sol";
+// import "./interfaces/IWormholeDSSReceiver.sol";
 import "./libraries/PausableOwnable.sol";
+import "./libraries/BlsBaseDSS.sol";
+import {IStakeViewer} from "./interfaces/IStakeViewer.sol";
 
-contract WormholeDSS is PausableOwnable {
+contract WormholeDSS is PausableOwnable, BlsBaseDSS {
     using BN254 for BN254.G1Point;
+    using BlsBaseDSSLib for BlsBaseDSSLib.State;
 
     /* ======= State Variables ======= */
 
-    ICore core;
-    BlsSdk.State blsState;
-    uint256 baseDeliveryPrice = 0;
     mapping(uint16 chainId => uint256 price) chainIdPrice;
+    IStakeViewer stakeViewer;
 
-    constructor() {
+    constructor() BlsBaseDSS() {
         _disableInitializers();
     }
 
@@ -43,14 +44,10 @@ contract WormholeDSS is PausableOwnable {
 
     /* ======= External Functions ======= */
 
-    function initialize(ICore _core, uint256 _baseDeliveryPrice) external initializer {
+    function initialize(address _core, IStakeViewer _stakeViewer, uint256 maxSlashablePercentageWad, uint8 thresholdPercentage) external initializer {
         __PausedOwnable_init(msg.sender, msg.sender);
-        core = _core;
-        baseDeliveryPrice = _baseDeliveryPrice;
-    }
-
-    function registerDSS(uint256 wadPercentage) external {
-        core.registerDSS(wadPercentage);
+        init(_core, maxSlashablePercentageWad, thresholdPercentage, REGISTRATION_MESSAGE_HASH);
+        stakeViewer = _stakeViewer;
     }
 
     // can include a condition in which operator would be kicked out as well get slashed
@@ -71,9 +68,9 @@ contract WormholeDSS is PausableOwnable {
         bytes memory nttManagerMessage
     ) external payable {
         if (msg.value < deliveryPayment) revert InsufficientPayment();
-        if (deliveryPayment > baseDeliveryPrice) {
+        if (deliveryPayment > chainIdPrice[sourceChain]) {
             address refundTo = address(uint160(uint256(refundAddress)));
-            uint256 refundAmount = deliveryPayment - baseDeliveryPrice;
+            uint256 refundAmount = deliveryPayment - chainIdPrice[sourceChain];
 
             (bool success,) = refundTo.call{value: refundAmount}("");
             require(success, "Refund failed");
@@ -92,67 +89,28 @@ contract WormholeDSS is PausableOwnable {
 
     function operatorSignaturesValid(
         bytes memory payload,
-        BN254.G1Point[] calldata nonSigningOperators,
-        BN254.G2Point calldata aggG2Pubkey,
-        BN254.G1Point calldata aggSign
+        address[] memory nonSigningOperators,
+        BN254.G2Point memory aggG2Pubkey,
+        BN254.G1Point memory aggSign
     ) public view {
-        // TODO: update to weighted majoirty
-        if (nonSigningOperators.length > (blsState.allOperatorPubkeyG1.length / 2)) {
-            revert NotEnoughOperatorsForMajority();
-        }
+        if (!isThresholdReached(stakeViewer, blsBaseDssStatePtr().getOperators(), nonSigningOperators)) revert ThresholdNotReached();
 
         BN254.G1Point memory nonSigningAggG1Key = BN254.G1Point(0, 0);
         for (uint256 i = 0; i < nonSigningOperators.length; i++) {
-            nonSigningAggG1Key = nonSigningAggG1Key.plus(nonSigningOperators[i]);
+            BN254.G1Point memory operatorG1Pubkey = BN254.G1Point(blsBaseDssStatePtr().operatorG1Pubkey[nonSigningOperators[i]].X, blsBaseDssStatePtr().operatorG1Pubkey[nonSigningOperators[i]].Y);
+            nonSigningAggG1Key = nonSigningAggG1Key.plus(operatorG1Pubkey);
         }
         nonSigningAggG1Key = nonSigningAggG1Key.negate();
 
+        BN254.G1Point memory aggregatedG1Pubkey = BN254.G1Point(blsBaseDssStatePtr().aggregatedG1Pubkey.X, blsBaseDssStatePtr().aggregatedG1Pubkey.Y);
         //calculated G1 pubkey
-        BN254.G1Point memory calculatedG1Pubkey = blsState.aggregatedG1Pubkey.plus(nonSigningAggG1Key);
+        BN254.G1Point memory calculatedG1Pubkey = aggregatedG1Pubkey.plus(nonSigningAggG1Key);
 
-        BlsSdk.verifySignature(calculatedG1Pubkey, aggG2Pubkey, aggSign, msgToHash(payload));
-    }
-
-    /* ======= Hooks ======= */
-
-    function supportsInterface(bytes4 interfaceID) external view returns (bool) {
-        if (interfaceID == IDSS.registrationHook.selector || interfaceID == IDSS.unregistrationHook.selector) {
-            return true;
-        }
-        return false;
-    }
-
-    function registrationHook(address operator, bytes memory extraData) external senderIsOperator(operator) {
-        BlsSdk.operatorRegistration(blsState, operator, extraData, REGISTRATION_MESSAGE_HASH);
-    }
-
-    function unregistrationHook(address operator, bytes memory _extraData) external senderIsOperator(operator) {
-        BlsSdk.operatorUnregistration(blsState, operator);
-    }
-
-    function requestUpdateStakeHook(address operator, Operator.StakeUpdateRequest memory newStake) external {}
-    function cancelUpdateStakeHook(address operator, address vault) external {}
-    function finishUpdateStakeHook(address operator) external {}
-    function requestSlashingHook(address operator, uint256[] memory slashingPercentagesWad) external {}
-    function cancelSlashingHook(address operator) external {}
-    function finishSlashingHook(address operator) external {}
-
-    /* ======= View Functions ======= */
-
-    function isOperatorRegistered(address operator) external view returns (bool) {
-        return BlsSdk.isOperatorRegistered(blsState, operator);
+        BlsBaseDSSLib.verifySignature(calculatedG1Pubkey, aggG2Pubkey, aggSign, msgToHash(payload));
     }
 
     function msgToHash(bytes memory payload) public pure returns (bytes32) {
         return keccak256(payload);
-    }
-
-    function allOperatorsG1() external view returns (BN254.G1Point[] memory) {
-        return BlsSdk.allOperatorsG1(blsState);
-    }
-
-    function operatorG1(address operator) external view returns (BN254.G1Point memory) {
-        return blsState.operatorG1Pubkey[operator];
     }
 
     function deliveryPrice(uint16 chainId) external view returns (uint256) {
@@ -167,9 +125,9 @@ contract WormholeDSS is PausableOwnable {
     }
 
     /* ======= Errors ======= */
-    error SenderNotOperator();
-    error NotEnoughOperatorsForMajority();
     error NotCore();
-    error InsufficientPayment();
     error NotOwner();
+    error SenderNotOperator();
+    error InsufficientPayment();
+    error ThresholdNotReached();
 }
