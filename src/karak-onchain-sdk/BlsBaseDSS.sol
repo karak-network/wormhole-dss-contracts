@@ -2,13 +2,13 @@
 pragma solidity ^0.8;
 
 import "forge-std/console.sol";
-import {IBaseDSS} from "../interfaces/IBaseDSS.sol";
-import {Constants} from "../interfaces/Constants.sol";
-import {BN254} from "./Bn254.sol";
-import {ICore} from "../karak/src/interfaces/ICore.sol";
-import {BaseDSSOperatorLib} from "./BaseDSSOperatorLib.sol";
-import {BlsBaseDSSLib} from "./BlsBaseDSSLib.sol";
-import {IStakeViewer} from "../interfaces/IStakeViewer.sol";
+import {IBaseDSS} from "./interfaces/IBaseDSS.sol";
+import {Constants} from "./interfaces/Constants.sol";
+import {BN254} from "./entities/BN254.sol";
+import {ICore} from "./interfaces/ICore.sol";
+import {BaseDSSOperatorLib} from "./entities/BaseDSSOperatorLib.sol";
+import {BlsBaseDSSLib} from "./entities/BlsBaseDSSLib.sol";
+import {IStakeViewer} from "./interfaces/IStakeViewer.sol";
 
 abstract contract BlsBaseDSS is IBaseDSS {
     using BN254 for BN254.G1Point;
@@ -157,6 +157,22 @@ abstract contract BlsBaseDSS is IBaseDSS {
 
     function operatorG1(address operator) external view virtual returns (BN254.G1Point memory g1Point) {
         g1Point = blsBaseDssStatePtr().operatorG1Pubkey[operator];
+    }
+
+    /**
+     * @notice Checks if the contract supports a specific interface.
+     * @param interfaceId The interface ID to check.
+     * @return A boolean indicating whether the interface is supported.
+     */
+    function supportsInterface(bytes4 interfaceId) external pure virtual returns (bool) {
+        if (
+            interfaceId == IBaseDSS.registrationHook.selector || interfaceId == IBaseDSS.unregistrationHook.selector
+                || interfaceId == IBaseDSS.requestUpdateStakeHook.selector
+                || interfaceId == IBaseDSS.finishUpdateStakeHook.selector
+        ) {
+            return true;
+        }
+        return false;
     }
 
     /* ============ Internal Functions ============ */

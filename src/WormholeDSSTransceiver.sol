@@ -6,7 +6,7 @@ import "./interfaces/IWormholeDSS.sol";
 import "./interfaces/IWormholeDSSReceiver.sol";
 import "./interfaces/INttManager.sol";
 import "./libraries/TransceiverStructs.sol";
-import {BN254} from "./libraries/BN254.sol";
+import {BN254} from "./karak-onchain-sdk/entities/Bn254.sol";
 import "wormhole-solidity-sdk/Utils.sol";
 
 contract WormholeDSSTransceiver is Transceiver, IWormholeDSSReceiver {

@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.20;
 
-import {BN254} from "../libraries/BN254.sol";
-import {IStakeViewer} from "./IStakeViewer.sol";
+import {BN254} from "../karak-onchain-sdk/entities/Bn254.sol";
+import {IStakeViewer} from "../karak-onchain-sdk/interfaces/IStakeViewer.sol";
 
 interface IWormholeDSS {
     function initialize(address _core, IStakeViewer _stakeViewer, uint256 maxSlashablePercentageWad) external;

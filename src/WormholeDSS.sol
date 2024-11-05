@@ -5,13 +5,14 @@ import "forge-std/console.sol";
 import {IDSS} from "./karak/src/interfaces/IDSS.sol";
 import {ICore} from "./karak/src/interfaces/ICore.sol";
 import {Operator} from "./karak/src/entities/Operator.sol";
-import {BN254} from "./libraries/Bn254.sol";
+import {BN254} from "./karak-onchain-sdk/entities/Bn254.sol";
 import "./libraries/Transceiver.sol";
 import "wormhole-solidity-sdk/Utils.sol";
-// import "./interfaces/IWormholeDSSReceiver.sol";
+import "./interfaces/IWormholeDSSReceiver.sol";
 import "./libraries/PausableOwnable.sol";
-import "./libraries/BlsBaseDSS.sol";
-import {IStakeViewer} from "./interfaces/IStakeViewer.sol";
+import {BlsBaseDSS} from "./karak-onchain-sdk/BlsBaseDSS.sol";
+import {BlsBaseDSSLib} from "./karak-onchain-sdk/entities/BlsBaseDSSLib.sol";
+import {IStakeViewer} from "./karak-onchain-sdk/interfaces/IStakeViewer.sol";
 
 contract WormholeDSS is PausableOwnable, BlsBaseDSS {
     using BN254 for BN254.G1Point;

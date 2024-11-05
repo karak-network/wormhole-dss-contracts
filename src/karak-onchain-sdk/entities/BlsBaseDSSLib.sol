@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.0;
 
+import "../interfaces/ICore.sol";
 import {BN254} from "./BN254.sol";
-import {ICore} from "../karak/src/interfaces/ICore.sol";
+import {ICore} from "../interfaces/ICore.sol";
 
 library BlsBaseDSSLib {
     using BN254 for BN254.G1Point;
 
-    ///@notice the user of the library should initiate a storage variable that has been built on this struct
     struct State {
         ICore core;
         mapping(address operatorAddress => bool exists) operatorExists;
