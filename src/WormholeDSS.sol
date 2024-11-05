@@ -5,10 +5,8 @@ import "forge-std/console.sol";
 import {IDSS} from "./karak/src/interfaces/IDSS.sol";
 import {ICore} from "./karak/src/interfaces/ICore.sol";
 import {Operator} from "./karak/src/entities/Operator.sol";
-import {BN254} from "./karak-onchain-sdk/entities/Bn254.sol";
-import "./libraries/Transceiver.sol";
+import {BN254} from "./karak-onchain-sdk/entities/BN254.sol";
 import "wormhole-solidity-sdk/Utils.sol";
-import "./interfaces/IWormholeDSSReceiver.sol";
 import "./libraries/PausableOwnable.sol";
 import {BlsBaseDSS} from "./karak-onchain-sdk/BlsBaseDSS.sol";
 import {BlsBaseDSSLib} from "./karak-onchain-sdk/entities/BlsBaseDSSLib.sol";
@@ -107,7 +105,7 @@ contract WormholeDSS is PausableOwnable, BlsBaseDSS {
         //calculated G1 pubkey
         BN254.G1Point memory calculatedG1Pubkey = aggregatedG1Pubkey.plus(nonSigningAggG1Key);
 
-        verifySignature(abi.encode(calculatedG1Pubkey, aggG2Pubkey, aggSign, msgToHash(payload)));
+        verifySignature(calculatedG1Pubkey, aggG2Pubkey, aggSign, msgToHash(payload));
     }
 
     function msgToHash(bytes memory payload) public pure returns (bytes32) {

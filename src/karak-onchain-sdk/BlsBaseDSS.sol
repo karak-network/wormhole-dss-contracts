@@ -122,15 +122,6 @@ abstract contract BlsBaseDSS is IBaseDSS {
         BlsBaseDSSLib.verifySignature(g1Key, g2Key, sign, msgHash);
     }
 
-     ///@notice checks whether the paring is successful. i.e. the signature is valid
-     ///@param data the abi encoded data that contains g1Key, g2Key, sign and msgHash
-    function verifySignature(
-        bytes memory data
-    ) public view virtual {
-        (BN254.G1Point memory g1Key, BN254.G2Point memory g2Key, BN254.G1Point memory sign, bytes32 msgHash) = abi.decode(data, (BN254.G1Point, BN254.G2Point, BN254.G1Point, bytes32));
-        BlsBaseDSSLib.verifySignature(g1Key, g2Key, sign, msgHash);
-    }
-
     ///@notice returns an array of all registered operators
     function getRegisteredOperators() external view virtual returns (address[] memory) {
         return blsBaseDssStatePtr().getOperators();
