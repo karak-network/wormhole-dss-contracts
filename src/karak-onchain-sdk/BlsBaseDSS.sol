@@ -58,7 +58,7 @@ abstract contract BlsBaseDSS is IBaseDSS {
             address(this), nonSigningOperators, abi.encode("")
         ).globalUsdValue;
 
-        return nonsigningOperatorUsdStake >= (allOperatorUsdStake * THRESHOLD_PERCENTAGE / 100);
+        return allOperatorUsdStake - nonsigningOperatorUsdStake >= (allOperatorUsdStake * THRESHOLD_PERCENTAGE / 100);
     }
 
     /* ============= Hooks ============= */
