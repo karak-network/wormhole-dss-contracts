@@ -1,5 +1,6 @@
 @openzeppelin/=node_modules/@openzeppelin/
 @openzeppelin-upgradeable/=node_modules/@openzeppelin/contracts-upgradeable/
+@chainlink/=node_modules/@chainlink/contracts
 solady/=node_modules/solady/
 forge-std/=lib/forge-std/src/
 wormhole-solidity-sdk/=lib/wormhole-solidity-sdk/src/

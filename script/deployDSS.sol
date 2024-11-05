@@ -7,9 +7,11 @@ import {TransparentUpgradeableProxy} from "@openzeppelin/contracts/proxy/transpa
 import {WormholeDSS} from "../src/WormholeDSS.sol";
 import {ICore} from "../src/karak/src/interfaces/ICore.sol";
 import "forge-std/Vm.sol";
+import {IStakeViewer} from "../src/karak-onchain-sdk/interfaces/IStakeViewer.sol";
 
 contract DeployDSS is Script {
     address internal CORE = vm.envAddress("CORE");
+    address internal STAKE_VIEWER = vm.envAddress("STAKE_VIEWER");
 
     function run() public {
         vm.startBroadcast();
@@ -21,24 +23,18 @@ contract DeployDSS is Script {
         console2.log();
 
         TransparentUpgradeableProxy wormholeDSSProxy =
-            new TransparentUpgradeableProxy(address(dssImpl), msg.sender, abi.encodeWithSelector(
-                WormholeDSS.initialize.selector, ICore(CORE), 0
-            ));
+            new TransparentUpgradeableProxy(address(dssImpl), msg.sender, "");
+
         WormholeDSS dssProxy = WormholeDSS(address(wormholeDSSProxy));
+        dssProxy.initialize(CORE, IStakeViewer(STAKE_VIEWER), 10e18, 30);
 
         console2.log("Address of Wormhole DSS Proxy: ", address(wormholeDSSProxy));
         console2.log();
-
-        initializeDSS(dssProxy);
 
         vm.stopBroadcast();
     }
 
     function deployDSSImplementation(address core) public returns (WormholeDSS dss) {
         dss = new WormholeDSS();
-    }
-
-    function initializeDSS(WormholeDSS dss) public {
-        dss.registerDSS(10e18);
     }
 }
