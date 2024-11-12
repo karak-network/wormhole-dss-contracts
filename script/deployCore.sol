@@ -18,11 +18,7 @@ import {SlashingHandler} from "../src/karak/src/SlashingHandler.sol";
 import {ERC20Mintable} from "../src/karak/test/helpers/contracts/ERC20Mintable.sol";
 
 contract DeployCore is Script {
-    address internal constant CORE_PROXY_ADMIN = 0x70997970C51812dc3A010C7d01b50e0d17dc79C8;
-    address internal constant CORE_MANAGER = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
-    address internal constant CORE_VETO_COMMITTEE = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
-    address internal constant SLASHING_HANDLER_PROXY_ADMIN = 0x70997970C51812dc3A010C7d01b50e0d17dc79C8;
-    address internal constant NTT_MANAGER = 0x7324d9AD40b4990dE3EBadB0E9103C5A1366C228;
+    address internal TOKEN = vm.envAddress("TOKEN");
 
     function run() public {
         vm.startBroadcast();
@@ -43,11 +39,11 @@ contract DeployCore is Script {
         initializeCore(coreProxy, vaultImpl);
         console2.log("Initialized Core(proxy) with params:");
         console2.log("\tVault Implementation:", vaultImpl);
-        console2.log("\tManager:", CORE_MANAGER);
-        console2.log("\tVeto Committee:", CORE_VETO_COMMITTEE);
+        console2.log("\tManager:", msg.sender);
+        console2.log("\tVeto Committee:", msg.sender);
         console2.log();
 
-        ERC20Mintable testERC20 = deployTestERC20();
+        ERC20Mintable testERC20 = ERC20Mintable(TOKEN);
 
         testERC20.mint(msg.sender, 1e6 * 1e6);
         console2.log("Deployed TEST ERC20:", address(testERC20));
@@ -81,12 +77,12 @@ contract DeployCore is Script {
         returns (Core coreProxy, SlashingHandler slashingHandlerProxy)
     {
         ERC1967Factory factory = new ERC1967Factory();
-        coreProxy = Core(factory.deploy(coreImpl, CORE_PROXY_ADMIN));
-        slashingHandlerProxy = SlashingHandler(factory.deploy(slashingHandlerImpl, SLASHING_HANDLER_PROXY_ADMIN));
+        coreProxy = Core(factory.deploy(coreImpl, msg.sender));
+        slashingHandlerProxy = SlashingHandler(factory.deploy(slashingHandlerImpl, msg.sender));
     }
 
     function initializeCore(Core core, address vaultImpl) public {
-        core.initialize(vaultImpl, CORE_MANAGER, CORE_VETO_COMMITTEE, 10000000, 10000000, 1000000);
+        core.initialize(vaultImpl, msg.sender, msg.sender, 10000000, 10000000, 1000000);
     }
 
     function deployTestERC20() public returns (ERC20Mintable testERC20) {
@@ -108,16 +104,5 @@ contract DeployCore is Script {
         slashingHandlers[0] = slashingHandler;
 
         Core(coreProxy).allowlistAssets(assets, slashingHandlers);
-    }
-
-    function deployDSS(address core) public returns (WormholeDSS dss) {
-        dss = new WormholeDSS();
-        dss.initialize(ICore(core), 0);
-        dss.registerDSS(10e18);
-    }
-
-    function deployTransceiver(address nttManger, address dss) public returns (WormholeDSSTransceiver transceiver) {
-        transceiver = new WormholeDSSTransceiver();
-        transceiver.initialize(nttManger, dss);
     }
 }

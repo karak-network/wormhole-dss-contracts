@@ -6,7 +6,7 @@ import "./interfaces/IWormholeDSS.sol";
 import "./interfaces/IWormholeDSSReceiver.sol";
 import "./interfaces/INttManager.sol";
 import "./libraries/TransceiverStructs.sol";
-import {BN254} from "./libraries/BlsSdk.sol";
+import {BN254} from "./karak-onchain-sdk/entities/Bn254.sol";
 import "wormhole-solidity-sdk/Utils.sol";
 
 contract WormholeDSSTransceiver is Transceiver, IWormholeDSSReceiver {
@@ -53,7 +53,7 @@ contract WormholeDSSTransceiver is Transceiver, IWormholeDSSReceiver {
 
     function receiveWormholeDSSMessage(
         bytes memory payload,
-        BN254.G1Point[] calldata nonSigningOperators,
+        address[] calldata nonSigningOperators,
         BN254.G2Point calldata aggG2Pubkey,
         BN254.G1Point calldata aggSign
     ) external whenNotPaused nonReentrant {
